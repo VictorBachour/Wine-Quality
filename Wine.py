@@ -2,7 +2,6 @@ import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import r2_score
 if __name__ == "__main__":
     url = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
@@ -23,4 +22,3 @@ if __name__ == "__main__":
     r2 = r2_score(y_test,y_pred)
 
     print(f"R² Score on Test Set: {r2}")
-1
