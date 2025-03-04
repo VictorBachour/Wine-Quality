@@ -1,21 +1,18 @@
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import r2_score
-
 class Model(nn.Module):
-    def __init__(self, in_features=11, h1=8, h2=9, out_features=1):
+    def __init__(self, in_features=11, h1=16, h2=9, out_features=1):
         super().__init__()
         self.fc1 = nn.Linear(in_features, h1)
         self.fc2 = nn.Linear(h1, h2)
         self.out = nn.Linear(h2, out_features)
 
     def forward(self, x):
-        x = F.relu(self.fc1(x))
-        x = F.relu(self.fc2(x))
+        x = torch.relu(self.fc1(x))
+        x = torch.relu(self.fc2(x))
         x = self.out(x)
 
         return x
@@ -42,7 +39,7 @@ if __name__ == "__main__":
 
     loss_fn = nn.MSELoss()
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=.01)
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
 
     best_loss = float('inf')
     patience = 10
